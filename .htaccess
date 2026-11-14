@@ -1,0 +1,5 @@
+Options -Indexes
+
+<FilesMatch "^(composer\.(json|lock)|INSTALACION\.txt)$">
+  Require all denied
+</FilesMatch>

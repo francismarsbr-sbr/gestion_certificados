@@ -1,0 +1,15 @@
+# Dependencias. Se reinstalan con: composer install
+/vendor/*
+!/vendor/.htaccess
+
+# Credenciales locales. Partir de config/config.example.php
+/config/config.php
+
+# PDF generados por el sistema
+/uploads/certificados/*.pdf
+
+# Temporales
+*.log
+Thumbs.db
+Desktop.ini
+.DS_Store

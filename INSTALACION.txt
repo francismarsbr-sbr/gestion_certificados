@@ -1,0 +1,63 @@
+Gestión de certificados — instalación en XAMPP
+================================================
+
+El sistema ya está en:
+  C:\xampp\htdocs\gestion_certificados
+
+1. Inicie Apache y MySQL desde el panel de XAMPP.
+
+2. Active la extensión GD si aún no lo está. En C:\xampp\php\php.ini
+   la línea debe quedar así, sin punto y coma:
+     extension=gd
+   Reinicie Apache después de cambiar php.ini.
+   En esta instalación esa línea ya fue activada.
+
+3. Importe la base de datos. En phpMyAdmin abra la pestaña Importar
+   y elija:
+     C:\xampp\htdocs\gestion_certificados\database\gestion_certificados.sql
+   También puede hacerlo por consola:
+     C:\xampp\mysql\bin\mysql.exe -u root < database\gestion_certificados.sql
+
+4. Copie config\config.example.php como config\config.php y escriba
+   ahí el host, el puerto, el nombre de la base, el usuario y la clave
+   de MySQL. config.php queda solo en este equipo: no entra al repositorio.
+
+5. Las bibliotecas de PDF (Dompdf) y de códigos QR ya quedaron instaladas
+   en la carpeta vendor. Si falta, en esta carpeta ejecute:
+     composer install
+
+6. Abra:
+     http://localhost/gestion_certificados/login.php
+
+7. La base no trae usuario administrador ni clave de ejemplo. Al abrir
+   el sistema, la primera pantalla pide registrar ese administrador.
+   Elija usted el usuario y la clave.
+
+8. Tampoco trae cursos, estudiantes, inscripciones ni certificados.
+   Esos datos se cargan desde el panel. El código de un curso no cambia
+   al editar el nombre.
+
+9. El nombre de la institución que se imprime y se verifica es el que
+   guarde en cada curso.
+
+10. La dirección de los códigos QR está en APP_URL, dentro de config.php.
+    En este equipo es:
+      http://localhost/gestion_certificados
+    Al publicarlo, cámbiela por el dominio real, sin barra al final.
+    La zona horaria está en APP_TIMEZONE (America/Caracas). Ajústela si
+    corresponde.
+
+11. Los PDF se guardan en uploads\certificados y no se abren por una
+    ruta pública. La descarga pasa por descargar.php, que exige sesión.
+    La verificación (verificar.php?token=...) es pública y no muestra
+    documento, correo ni teléfono.
+
+Roles
+-----
+Administrador: cursos, estudiantes, inscripciones, certificados,
+usuarios y anulación.
+Operador: estudiantes, inscripciones, consulta de cursos y generación
+o descarga de certificados. No administra usuarios ni anula.
+
+La regla de los códigos está solo en libs\Codigos.php.
+Curso: IAP-001. Certificado: IAP-001-0001.
